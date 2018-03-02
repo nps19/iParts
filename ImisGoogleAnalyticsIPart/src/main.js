@@ -1,14 +1,20 @@
 import {ImisContextProvider} from "./services/imisContextProvider";
 
-ImisContextProvider
-    .getContextAsync()
-    .then(
-        context => {
-            callGoogleAnalytics(context.user.id);
-            console.log(`Call to GA is performed for user ${context.user.id}.`);
-        },
-        reason => console.error(reason)
-    );
+jQuery(document).ready(payload);
+
+function payload() {
+    ImisContextProvider
+        .getContextAsync()
+        .then(
+            context => {
+                const userId = `${context.user.id}_${context.user.firstName}_${context.user.lastName}`.trim();
+                callGoogleAnalytics(userId);
+                console.log(`Call to GA is performed for user ${userId}.`);
+            },
+            reason => console.error(reason)
+        );
+}
+
 
 function callGoogleAnalytics(userId) {
 
