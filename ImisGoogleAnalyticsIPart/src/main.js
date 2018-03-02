@@ -1,6 +1,7 @@
 import {ImisContextProvider} from "./services/imisContextProvider";
 
-jQuery(document).ready(payload);
+jQuery(payload);
+
 
 function payload() {
     ImisContextProvider
@@ -15,13 +16,9 @@ function payload() {
         );
 }
 
-
 function callGoogleAnalytics(userId) {
 
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    const ga = initGA("imisGA");
 
     ga(
         "create",
@@ -32,4 +29,12 @@ function callGoogleAnalytics(userId) {
 
     ga("send", "pageview");
 
+}
+
+function initGA(fieldName) {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js', fieldName);
+    return window[fieldName];
 }
