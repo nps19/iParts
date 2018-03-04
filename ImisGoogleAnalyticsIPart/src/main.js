@@ -22,22 +22,14 @@ function payload() {
  * @param {ImisUser} user
  */
 function callGoogleAnalytics(user) {
-
     console.log(user);
-
-    const userId = `${user.id} - ${user.fullName}`;
-
     const ga = initGA("imisGA");
-
-    ga(
-        "create",
-        "UA-17922425-4",
-        "auto",
-        { userId: userId }
-    );
-
-    ga('set', 'dimension1', user.memberType);
-
+    ga("create", "UA-17922425-4", "auto", { userId: `${user.id} - ${user.fullName}` });
+    ga("set", "dimension1", user.memberType);
+    ga("set", "dimension2", user.paidThrough);
+    ga("set", "dimension3", user.company);
+    ga("set", "dimension4", user.companyId);
+    ga("set", "dimension6", user.joinDate);
     ga("send", "pageview");
 
 }
