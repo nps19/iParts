@@ -14,4 +14,10 @@ export class ImisUser {
         this.memberType = memberType;
     }
 
+    get fullName() {
+        return [this.firstName, this.lastName]
+            .map(i => (i || "").trim())
+            .join(" ");
+    }
+
 }
