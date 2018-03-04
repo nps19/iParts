@@ -28,20 +28,18 @@ function getUserAsync() {
         .getAsync("/IQA?QueryName=$/_AD/GetLoggedInUser")
         .then(
             items => {
-                console.log(items);
 
                 const record = items[0]["Properties"]["$values"]
                     .reduce((a, v) => ({...a, ...{[v["Name"]]: v["Value"]}}), {});
 
                 console.log(record);
-                console.log(record["MemberType"]);
 
                 return new ImisUser(
                     record["ID"],
                     record["FirstName"],
                     record["LastName"],
                     record["MemberType"]
-                )
+                );
             },
             reason => Promise.reject(`Unable to get iMIS user: ${reason}`)
         )
