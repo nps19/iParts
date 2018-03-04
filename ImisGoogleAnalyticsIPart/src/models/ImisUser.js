@@ -17,7 +17,8 @@ export class ImisUser {
     get fullName() {
         return [this.firstName, this.lastName]
             .map(i => (i || "").trim())
-            .join(" ");
+            .join(" ")
+            .trim();
     }
 
 }
