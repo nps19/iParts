@@ -5,11 +5,13 @@ export class ImisUser {
      * @param {number} id
      * @param {string} firstName
      * @param {string} lastName
+     * @param {string} memberType
      */
-    constructor(id, firstName, lastName) {
+    constructor(id, firstName, lastName, memberType) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.memberType = memberType;
     }
 
 }

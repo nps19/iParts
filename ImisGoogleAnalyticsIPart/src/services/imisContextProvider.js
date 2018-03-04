@@ -34,11 +34,13 @@ function getUserAsync() {
                     .reduce((a, v) => ({...a, ...{[v["Name"]]: v["Value"]}}), {});
 
                 console.log(record);
+                console.log(record["MemberType"]);
 
                 return new ImisUser(
                     record["ID"],
                     record["FirstName"],
-                    record["LastName"]
+                    record["LastName"],
+                    record["MemberType"]
                 )
             },
             reason => Promise.reject(`Unable to get iMIS user: ${reason}`)

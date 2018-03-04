@@ -8,7 +8,10 @@ function payload() {
         .getContextAsync()
         .then(
             context => {
-                const userId = `${context.user.id}_${context.user.firstName}_${context.user.lastName}`.trim();
+
+                const userIdName = `${context.user.id} - ${context.user.firstName} ${context.user.lastName}`.trim();
+                const userId =  `${context.user.id}`.trim();
+
                 callGoogleAnalytics(userId);
                 console.log(`Call to GA is performed for user ${userId}.`);
             },
@@ -26,6 +29,12 @@ function callGoogleAnalytics(userId) {
         "auto",
         { userId: userId }
     );
+
+    /* test const memberType = `${userId.memberType}`.trim();
+
+    console.log(`Tom-${userId.memberType}`);*/
+
+    ga('set', 'dimension1', 'Regular');
 
     ga("send", "pageview");
 
