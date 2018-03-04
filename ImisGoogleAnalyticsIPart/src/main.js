@@ -1,4 +1,5 @@
 import {ImisContextProvider} from "./services/imisContextProvider";
+import {ImisUser} from "./models";
 
 jQuery(payload);
 
@@ -8,18 +9,23 @@ function payload() {
         .getContextAsync()
         .then(
             context => {
-
-                const userIdName = `${context.user.id} - ${context.user.firstName} ${context.user.lastName}`.trim();
-                const userId =  `${context.user.id}`.trim();
-
-                callGoogleAnalytics(userId);
-                console.log(`Call to GA is performed for user ${userId}.`);
+                const user = context.user;
+                callGoogleAnalytics(user);
+                console.log(`Call to GA is performed for user ${user.id} - ${user.fullName}.`);
             },
             reason => console.error(reason)
         );
 }
 
-function callGoogleAnalytics(userId) {
+/**
+ * Performs call to GA
+ * @param {ImisUser} user
+ */
+function callGoogleAnalytics(user) {
+
+    console.log(user);
+
+    const userId = `${user.id} - ${user.fullName}`;
 
     const ga = initGA("imisGA");
 
@@ -30,11 +36,7 @@ function callGoogleAnalytics(userId) {
         { userId: userId }
     );
 
-    /* test const memberType = `${userId.memberType}`.trim();
-
-    console.log(`Tom-${userId.memberType}`);*/
-
-    ga('set', 'dimension1', 'Regular');
+    ga('set', 'dimension1', user.memberType);
 
     ga("send", "pageview");
 
