@@ -38,7 +38,11 @@ function getUserAsync() {
                     record["ID"],
                     record["FirstName"],
                     record["LastName"],
-                    record["MemberType"]
+                    record["MemberType"],
+                    record["JoinDate"],
+                    record["PaidThrough"],
+                    record["CompanyId"],
+                    record["Company"]
                 );
             },
             reason => Promise.reject(`Unable to get iMIS user: ${reason}`)
